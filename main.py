@@ -682,6 +682,16 @@ plane_colors = {
 
 fig, ax = plt.subplots(figsize=(10, 6))
 
+for pp in df_long["Participant"].unique():
+    y_vals = [
+        df_long.loc[(df_long["Participant"]==pp) & (df_long["Plane"]=="Frontal"), "Peak_LWB"].iloc[0],
+        df_long.loc[(df_long["Participant"]==pp) & (df_long["Plane"]=="Sagittal"), "Peak_LWB"].iloc[0],
+        df_long.loc[(df_long["Participant"]==pp) & (df_long["Plane"]=="Transverse"), "Peak_LWB"].iloc[0]
+    ]
+    y_vals = [float(y) for y in y_vals]
+    x_vals = [0, 1, 2]
+    ax.plot(x_vals, y_vals, color=(0.3, 0.3, 0.3), zorder=2, alpha=0.1)
+
 sns.violinplot(
     x="Plane",
     y="Peak_LWB",
